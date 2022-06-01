@@ -57,7 +57,7 @@ fun MyApp() {
             RegistroOcupaciones()
         }
         composable(route = Screen.ConsultaOcupaciones.route){
-            ConsultaOcupaciones(goOcupRegistro = {navHostController.navigate(Screen.RegistroOcupaciones.route)})
+            ConsultaOcupaciones(goOcupRegistro = { navHostController.navigate(Screen.RegistroOcupaciones.route) })
         }
     }
 
@@ -69,89 +69,96 @@ fun RegistroPerson(){
     var persona by rememberSaveable() {
         mutableStateOf("")
     }
+    Scaffold(
+        topBar={
+            TopAppBar(title = { Text(text = "Registro de personas")})
+        } 
     
-    Column(modifier = Modifier.padding(8.dp)) {
-        OutlinedTextField(
-            label = {
-                Text(text = "ID")
-            },
-            leadingIcon={
-                Icon(imageVector = Icons.Default.Person, contentDescription = null)
-            },
+    ) {
+        Column(modifier = Modifier.padding(8.dp)) {
+            OutlinedTextField(
+                label = {
+                    Text(text = "ID")
+                },
+                leadingIcon={
+                    Icon(imageVector = Icons.Default.Person, contentDescription = null)
+                },
 
 
-            value = persona,
-            onValueChange = {persona = it},
-            modifier = Modifier.fillMaxWidth()
-        )
-        OutlinedTextField(
-            label = {
+                value = persona,
+                onValueChange = {persona = it},
+                modifier = Modifier.fillMaxWidth()
+            )
+            OutlinedTextField(
+                label = {
                     Text(text = "Escribe tu nombre")
-            },
-            leadingIcon={
-                Icon(imageVector = Icons.Default.Person, contentDescription = null)
-            },
-                    
-            
-            value = persona, 
-            onValueChange = {persona = it},
-            modifier = Modifier.fillMaxWidth()
-        )
-        OutlinedTextField(
-            label = {
-                Text(text = "Salario")
-            },
-            leadingIcon={
-                Icon(imageVector = Icons.Default.MonetizationOn, contentDescription = null)
-            },
-
-
-            value = persona,
-            onValueChange = {persona = it},
-            modifier = Modifier.fillMaxWidth()
-
-        )
-
-        Row() {
-
-            OutlinedButton(
-                onClick = { /*TODO*/
-                    //
                 },
-                modifier = Modifier.padding(5.dp)
-            ) {
-                Icon(imageVector = Icons.Default.Clear, contentDescription = null)
-                Text(text = " Nuevo")
+                leadingIcon={
+                    Icon(imageVector = Icons.Default.Person, contentDescription = null)
+                },
+
+
+                value = persona,
+                onValueChange = {persona = it},
+                modifier = Modifier.fillMaxWidth()
+            )
+            OutlinedTextField(
+                label = {
+                    Text(text = "Salario")
+                },
+                leadingIcon={
+                    Icon(imageVector = Icons.Default.MonetizationOn, contentDescription = null)
+                },
+
+
+                value = persona,
+                onValueChange = {persona = it},
+                modifier = Modifier.fillMaxWidth()
+
+            )
+
+            Row() {
+
+                OutlinedButton(
+                    onClick = { /*TODO*/
+                        //
+                    },
+                    modifier = Modifier.padding(5.dp)
+                ) {
+                    Icon(imageVector = Icons.Default.Clear, contentDescription = null)
+                    Text(text = " Nuevo")
+
+
+                }
+
+                OutlinedButton(
+                    onClick = { /*TODO*/
+                        //
+                    },
+                    modifier = Modifier.padding(5.dp)
+                ) {
+                    Icon(imageVector = Icons.Default.AddCircle, contentDescription = null)
+                    Text(text = " Guardar")
+
+                }
+
+                OutlinedButton(
+                    onClick = { /*TODO*/
+                        //
+                    },
+                    modifier = Modifier.padding(5.dp)
+                ) {
+                    Icon(imageVector = Icons.Default.Delete, contentDescription = null)
+                    Text(text = " Eliminar")
+
+                }
 
 
             }
-
-            OutlinedButton(
-                onClick = { /*TODO*/
-                    //
-                },
-                modifier = Modifier.padding(5.dp)
-            ) {
-                Icon(imageVector = Icons.Default.AddCircle, contentDescription = null)
-                Text(text = " Guardar")
-
-            }
-
-            OutlinedButton(
-                onClick = { /*TODO*/
-                    //
-                },
-                modifier = Modifier.padding(5.dp)
-            ) {
-                Icon(imageVector = Icons.Default.Delete, contentDescription = null)
-                Text(text = " Eliminar")
-
-            }
-
-
         }
-    }
 
+    }
+    
 
 
 
@@ -208,66 +215,72 @@ fun RowNombre(nombre: String) {
 
 @Composable
 fun RegistroOcupaciones(){
-    
-    
-    Column(modifier = Modifier.padding(8.dp)) {
-        
-        OutlinedTextField(
-            label = {
-                Text(text = "ID")
-            },
-            leadingIcon = {
-                          Icon(imageVector = Icons.Default.PermIdentity, contentDescription = null)
-            },
-            value = "", 
-            onValueChange = {},
-            modifier = Modifier.fillMaxWidth()
-        )
-        OutlinedTextField(
-            label = {
-                Text(text = "Ocupacion")
-            },
-            leadingIcon = {
-                Icon(imageVector = Icons.Default.PermIdentity, contentDescription = null)
-            },
-            value = "",
-            onValueChange = {},
-            modifier = Modifier.fillMaxWidth()
-        )
-        
-        Row() {
-            
-            OutlinedButton(
-                onClick = { 
-                 
+
+    Scaffold(
+        topBar = {
+            TopAppBar(title = { Text(text = "Registro de ocupaciones")})
+        }
+    ) {
+        Column(modifier = Modifier.padding(8.dp)) {
+
+            OutlinedTextField(
+                label = {
+                    Text(text = "ID")
                 },
-                modifier = Modifier.padding(5.dp)
-            ) {
-                Icon(imageVector = Icons.Default.Clear, contentDescription =null )
-                Text(text = "Nuevo")
-            }
-
-            OutlinedButton(
-                onClick = {
-
+                leadingIcon = {
+                    Icon(imageVector = Icons.Default.PermIdentity, contentDescription = null)
                 },
-                modifier = Modifier.padding(5.dp)
-            ) {
-                Icon(imageVector = Icons.Default.Add, contentDescription =null )
-                Text(text = "Guardar")
-            }
-
-            OutlinedButton(
-                onClick = {
-
+                value = "",
+                onValueChange = {},
+                modifier = Modifier.fillMaxWidth()
+            )
+            OutlinedTextField(
+                label = {
+                    Text(text = "Ocupacion")
                 },
-                modifier = Modifier.padding(5.dp)
-            ) {
-                Icon(imageVector = Icons.Default.Delete, contentDescription =null )
-                Text(text = "Eliminar")
+                leadingIcon = {
+                    Icon(imageVector = Icons.Default.PermIdentity, contentDescription = null)
+                },
+                value = "",
+                onValueChange = {},
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Row() {
+
+                OutlinedButton(
+                    onClick = {
+
+                    },
+                    modifier = Modifier.padding(5.dp)
+                ) {
+                    Icon(imageVector = Icons.Default.Clear, contentDescription =null )
+                    Text(text = "Nuevo")
+                }
+
+                OutlinedButton(
+                    onClick = {
+
+                    },
+                    modifier = Modifier.padding(5.dp)
+                ) {
+                    Icon(imageVector = Icons.Default.Add, contentDescription =null )
+                    Text(text = "Guardar")
+                }
+
+                OutlinedButton(
+                    onClick = {
+
+                    },
+                    modifier = Modifier.padding(5.dp)
+                ) {
+                    Icon(imageVector = Icons.Default.Delete, contentDescription =null )
+                    Text(text = "Eliminar")
+                }
             }
         }
     }
+
 }
 @Composable
 fun ConsultaOcupaciones(goOcupRegistro : () -> Unit){
