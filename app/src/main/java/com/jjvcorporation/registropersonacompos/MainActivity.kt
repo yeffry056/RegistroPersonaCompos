@@ -22,8 +22,15 @@ import androidx.navigation.compose.rememberNavController
 import com.jjvcorporation.registropersonacompos.ui.theme.RegistroPersonaComposTheme
 import java.io.File
 import androidx.compose.material.Icon
+import com.jjvcorporation.registropersonacompos.model.Ocupacion
+import com.jjvcorporation.registropersonacompos.ui.ocupacion.ConsultaOcupaciones
+import com.jjvcorporation.registropersonacompos.ui.ocupacion.RegistroOcupaciones
+import com.jjvcorporation.registropersonacompos.ui.persona.ConsultaPerson
+import com.jjvcorporation.registropersonacompos.ui.persona.RegistroPerson
 import com.jjvcorporation.registropersonacompos.util.Screen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +61,7 @@ fun MyApp() {
             RegistroPerson()
         }
         composable(route = Screen.RegistroOcupaciones.route){
-            RegistroOcupaciones()
+            RegistroOcupaciones()//OJo
         }
         composable(route = Screen.ConsultaOcupaciones.route){
             ConsultaOcupaciones(goOcupRegistro = { navHostController.navigate(Screen.RegistroOcupaciones.route) })
@@ -63,148 +70,8 @@ fun MyApp() {
 
 }
 
-@Composable
-fun RegistroPerson(){
-    
-    var persona by rememberSaveable() {
-        mutableStateOf("")
-    }
-    Scaffold(
-        topBar={
-            TopAppBar(title = { Text(text = "Registro de personas")})
-        } 
-    
-    ) {
-        Column(modifier = Modifier.padding(8.dp)) {
-            OutlinedTextField(
-                label = {
-                    Text(text = "ID")
-                },
-                leadingIcon={
-                    Icon(imageVector = Icons.Default.Person, contentDescription = null)
-                },
 
 
-                value = persona,
-                onValueChange = {persona = it},
-                modifier = Modifier.fillMaxWidth()
-            )
-            OutlinedTextField(
-                label = {
-                    Text(text = "Escribe tu nombre")
-                },
-                leadingIcon={
-                    Icon(imageVector = Icons.Default.Person, contentDescription = null)
-                },
-
-
-                value = persona,
-                onValueChange = {persona = it},
-                modifier = Modifier.fillMaxWidth()
-            )
-            OutlinedTextField(
-                label = {
-                    Text(text = "Salario")
-                },
-                leadingIcon={
-                    Icon(imageVector = Icons.Default.MonetizationOn, contentDescription = null)
-                },
-
-
-                value = persona,
-                onValueChange = {persona = it},
-                modifier = Modifier.fillMaxWidth()
-
-            )
-
-            Row() {
-
-                OutlinedButton(
-                    onClick = { /*TODO*/
-                        //
-                    },
-                    modifier = Modifier.padding(5.dp)
-                ) {
-                    Icon(imageVector = Icons.Default.Clear, contentDescription = null)
-                    Text(text = " Nuevo")
-
-
-                }
-
-                OutlinedButton(
-                    onClick = { /*TODO*/
-                        //
-                    },
-                    modifier = Modifier.padding(5.dp)
-                ) {
-                    Icon(imageVector = Icons.Default.AddCircle, contentDescription = null)
-                    Text(text = " Guardar")
-
-                }
-
-                OutlinedButton(
-                    onClick = { /*TODO*/
-                        //
-                    },
-                    modifier = Modifier.padding(5.dp)
-                ) {
-                    Icon(imageVector = Icons.Default.Delete, contentDescription = null)
-                    Text(text = " Eliminar")
-
-                }
-
-
-            }
-        }
-
-    }
-    
-
-
-
-}
-@Composable
-fun ConsultaPerson(goRegistro : () -> Unit, goOcupacion : () -> Unit){
-
-    val scaffoldState = rememberScaffoldState()
-
-    Scaffold(
-        topBar = {
-            TopAppBar(title = { Text(text = "Consulta Persona")})
-        },
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = {
-                    goRegistro()
-                },
-                backgroundColor = MaterialTheme.colors.primary
-
-
-            ) {
-                Icon(imageVector = Icons.Default.Person, contentDescription = null)
-
-            }
-        },
-        scaffoldState = scaffoldState
-    ) {
-
-        Column(modifier = Modifier.padding(8.dp)) {
-            OutlinedButton(
-                onClick = { 
-                    goOcupacion()
-                }) {
-                Text(text = "Ocupaciones")
-            }
-            val lis = listOf("juan", "miguel")
-
-            LazyColumn(modifier = Modifier.fillMaxWidth()){
-                items(lis){ nombre->
-                    RowNombre(nombre)
-                }
-            }
-        }
-    }
-}
 
 @Composable
 fun RowNombre(nombre: String) {
@@ -213,117 +80,13 @@ fun RowNombre(nombre: String) {
     }
 }
 
-@Composable
-fun RegistroOcupaciones(){
-
-    Scaffold(
-        topBar = {
-            TopAppBar(title = { Text(text = "Registro de ocupaciones")})
-        }
-    ) {
-        Column(modifier = Modifier.padding(8.dp)) {
-
-            OutlinedTextField(
-                label = {
-                    Text(text = "ID")
-                },
-                leadingIcon = {
-                    Icon(imageVector = Icons.Default.PermIdentity, contentDescription = null)
-                },
-                value = "",
-                onValueChange = {},
-                modifier = Modifier.fillMaxWidth()
-            )
-            OutlinedTextField(
-                label = {
-                    Text(text = "Ocupacion")
-                },
-                leadingIcon = {
-                    Icon(imageVector = Icons.Default.PermIdentity, contentDescription = null)
-                },
-                value = "",
-                onValueChange = {},
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            Row() {
-
-                OutlinedButton(
-                    onClick = {
-
-                    },
-                    modifier = Modifier.padding(5.dp)
-                ) {
-                    Icon(imageVector = Icons.Default.Clear, contentDescription =null )
-                    Text(text = "Nuevo")
-                }
-
-                OutlinedButton(
-                    onClick = {
-
-                    },
-                    modifier = Modifier.padding(5.dp)
-                ) {
-                    Icon(imageVector = Icons.Default.Add, contentDescription =null )
-                    Text(text = "Guardar")
-                }
-
-                OutlinedButton(
-                    onClick = {
-
-                    },
-                    modifier = Modifier.padding(5.dp)
-                ) {
-                    Icon(imageVector = Icons.Default.Delete, contentDescription =null )
-                    Text(text = "Eliminar")
-                }
-            }
-        }
-    }
-
-}
-@Composable
-fun ConsultaOcupaciones(goOcupRegistro : () -> Unit){
-
-    val scaffoldState = rememberScaffoldState()
-
-    Scaffold(
-        topBar = {
-            TopAppBar(title = { Text(text = "Listado de Ocupaciones")})
-        },
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = {
-                    goOcupRegistro()
-                },
-                backgroundColor = MaterialTheme.colors.primary
-            ) {
-                Icon(imageVector = Icons.Default.Add, contentDescription = null)
-            }
-        },
-        scaffoldState = scaffoldState
-    ) {
 
 
-        Column(modifier = Modifier.padding(8.dp)) {
-
-            val ocup = listOf("Bombero","Dentista", "Enfermera","Medico")
-            LazyColumn(modifier = Modifier.fillMaxWidth()){
-                items(ocup){ocupaciones->
-                    RowOcupaciones(ocupaciones)
-                }
-            }
-        }
-    }
-    
-
-
-}
 
 @Composable
-fun RowOcupaciones(ocupaciones: String){
+fun RowOcupaciones(ocupacion: Ocupacion){
     Row() {
-        Text("La ocupacion es: $ocupaciones")
+        Text(ocupacion.ocupaciones)
     }
 }
 
